@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <!-- Importando Tailwind CSS desde CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Estilos adicionales para los mensajes de error */
+        .error {
+            color: red;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-md w-96">
+        <h2 class="text-2xl font-bold mb-4">Contacto</h2>
+        <form id="contactForm">
+            <!-- Campo Nombre -->
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <span id="nameError" class="error"></span>
+            </div>
+
+            <!-- Campo Correo Electrónico -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                <input type="email" id="email" name="email" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required>
+                <span id="emailError" class="error"></span>
+            </div>
+
+            <!-- Campo Asunto -->
+            <div class="mb-4">
+                <label for="subject" class="block text-sm font-medium text-gray-700">Asunto</label>
+                <input type="text" id="subject" name="subject" class="mt-1 block w-full border border-gray-300 rounded-md p-2">
+            </div>
+
+            <!-- Campo Mensaje -->
+            <div class="mb-4">
+                <label for="message" class="block text-sm font-medium text-gray-700">Mensaje</label>
+                <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md p-2" required></textarea>
+                <span id="messageError" class="error"></span>
+            </div>
+
+            <!-- Botón Enviar -->
+            <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        // Función para validar el formulario
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+
+            // Limpiar mensajes de error previos
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('messageError').textContent = '';
+
+            // Obtener valores de los campos
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            let valid = true; // Variable para controlar la validez del formulario
+
+            // Validación del campo Nombre
+            if (name === '') {
+                document.getElementById('nameError').textContent = 'El nombre es obligatorio.';
+                valid = false;
+            }
+
+            // Validación del campo Correo Electrónico
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el email
+            if (email === '') {
+                document.getElementById('emailError').textContent = 'El correo electrónico es obligatorio.';
+                valid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = 'El correo electrónico no es válido.';
+                valid = false;
+            }
+
+            // Validación del campo Mensaje
+            if (message.length < 10) {
+                document.getElementById('messageError').textContent = 'El mensaje debe tener al menos 10 caracteres.';
+                valid = false;
+            }
+
+            // Si el formulario es válido, se puede enviar (aquí puedes agregar la lógica para enviar el formulario, como una llamada a una API o similar)
+            if (valid) {
+                alert('Formulario enviado con éxito'); // Mensaje de éxito
+                // Aquí puedes agregar la lógica para enviar el formulario, como una llamada a una API
+            }
+        });
+    </script>
+</body>
+</html>

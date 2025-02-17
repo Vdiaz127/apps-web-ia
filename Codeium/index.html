@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        .form-control.is-invalid + .error-message {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Formulario de Contacto</h2>
+                        
+                        <!-- Formulario de contacto -->
+                        <form id="contactForm" novalidate>
+                            <!-- Campo Nombre -->
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre *</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <div class="error-message">El nombre es obligatorio</div>
+                            </div>
+
+                            <!-- Campo Email -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo electrónico *</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                                <div class="error-message">Por favor, ingrese un correo electrónico válido</div>
+                            </div>
+
+                            <!-- Campo Asunto -->
+                            <div class="mb-3">
+                                <label for="asunto" class="form-label">Asunto</label>
+                                <input type="text" class="form-control" id="asunto" name="asunto">
+                            </div>
+
+                            <!-- Campo Mensaje -->
+                            <div class="mb-3">
+                                <label for="mensaje" class="form-label">Mensaje *</label>
+                                <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+                                <div class="error-message">El mensaje debe contener al menos 10 caracteres</div>
+                            </div>
+
+                            <!-- Botón de envío -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript para validación -->
+    <script>
+        // Esperar a que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener referencia al formulario
+            const form = document.getElementById('contactForm');
+            
+            // Función para validar email usando expresión regular
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            // Función para mostrar error en un campo
+            function showError(input, message) {
+                input.classList.add('is-invalid');
+                const errorDiv = input.nextElementSibling;
+                if (errorDiv && errorDiv.classList.contains('error-message')) {
+                    errorDiv.textContent = message;
+                }
+            }
+
+            // Función para limpiar error de un campo
+            function clearError(input) {
+                input.classList.remove('is-invalid');
+            }
+
+            // Manejar el evento de envío del formulario
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                let isValid = true;
+
+                // Obtener referencias a los campos
+                const nombre = document.getElementById('nombre');
+                const email = document.getElementById('email');
+                const mensaje = document.getElementById('mensaje');
+
+                // Limpiar errores previos
+                clearError(nombre);
+                clearError(email);
+                clearError(mensaje);
+
+                // Validar nombre
+                if (!nombre.value.trim()) {
+                    showError(nombre, 'El nombre es obligatorio');
+                    isValid = false;
+                }
+
+                // Validar email
+                if (!email.value.trim()) {
+                    showError(email, 'El correo electrónico es obligatorio');
+                    isValid = false;
+                } else if (!isValidEmail(email.value)) {
+                    showError(email, 'Por favor, ingrese un correo electrónico válido');
+                    isValid = false;
+                }
+
+                // Validar mensaje
+                if (mensaje.value.trim().length < 10) {
+                    showError(mensaje, 'El mensaje debe contener al menos 10 caracteres');
+                    isValid = false;
+                }
+
+                // Si todo es válido, mostrar mensaje de éxito
+                if (isValid) {
+                    alert('¡Formulario enviado con éxito!');
+                    form.reset();
+                }
+            });
+
+            // Limpiar errores cuando el usuario comienza a escribir
+            form.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', () => clearError(input));
+            });
+        });
+    </script>
+</body>
+</html>

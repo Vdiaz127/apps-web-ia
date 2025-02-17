@@ -1,0 +1,21 @@
+Actúa como un desarrollador web experto y genera un formulario de contacto en HTML con validación en JavaScript. El formulario debe cumplir con las siguientes especificaciones:
+
+1. **Estructura del formulario:**
+   - Incluir los siguientes campos: Nombre, Correo electrónico, Asunto y Mensaje.
+   - Agregar un botón de "Enviar".
+
+2. **Validaciones en JavaScript:**
+   - El campo "Nombre" es obligatorio.
+   - El campo "Correo electrónico" es obligatorio y debe tener un formato de email válido.
+   - El campo "Mensaje" debe contener al menos 10 caracteres.
+   - Si algún campo falla la validación, mostrar un mensaje de error adecuado junto al campo correspondiente.
+
+3. **Comentarios y legibilidad:**
+   - Incluye comentarios en el código que expliquen cada parte importante (HTML y JavaScript).
+   - Asegúrate de que el código sea limpio, estructurado y fácil de entender.
+
+4. **Estilos y frameworks:**
+   - Para mejorar la estética, utiliza Tailwind CSS o Bootstrap, importándolos mediante enlaces en la cabecera del HTML (no instalados localmente).
+   - Puedes agregar estilos adicionales si es necesario, pero la prioridad es asegurar la funcionalidad y validación del formulario.
+
+Genera el código completo en un solo archivo HTML o separa el JavaScript en una sección aparte, de modo que pueda copiarse y probarse fácilmente.

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Contacto</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875em;
+            margin-top: 0.25rem;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="contactForm" class="form-container">
+            <h2 class="mb-4">Formulario de Contacto</h2>
+            
+            <!-- Campo Nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre*</label>
+                <input type="text" class="form-control" id="nombre" name="nombre">
+                <div class="error-message" id="nombreError"></div>
+            </div>
+            
+            <!-- Campo Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico*</label>
+                <input type="email" class="form-control" id="email" name="email">
+                <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <!-- Campo Asunto -->
+            <div class="mb-3">
+                <label for="asunto" class="form-label">Asunto</label>
+                <input type="text" class="form-control" id="asunto" name="asunto">
+            </div>
+            
+            <!-- Campo Mensaje -->
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje*</label>
+                <textarea class="form-control" id="mensaje" name="mensaje" rows="4"></textarea>
+                <div class="error-message" id="mensajeError"></div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS y Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Función principal de validación
+        function validarFormulario(event) {
+            event.preventDefault(); // Prevenir envío del formulario
+            
+            // Resetear mensajes de error
+            document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+            document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-invalid'));
+            
+            // Obtener valores de los campos
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            
+            let valido = true;
+
+            // Validación Nombre (requerido)
+            if (!nombre) {
+                mostrarError('nombreError', 'El nombre es obligatorio', 'nombre');
+                valido = false;
+            }
+
+            // Validación Email (formato válido)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                mostrarError('emailError', 'El correo electrónico es obligatorio', 'email');
+                valido = false;
+            } else if (!emailRegex.test(email)) {
+                mostrarError('emailError', 'Ingrese un correo electrónico válido', 'email');
+                valido = false;
+            }
+
+            // Validación Mensaje (mínimo 10 caracteres)
+            if (mensaje.length < 10) {
+                mostrarError('mensajeError', 'El mensaje debe tener al menos 10 caracteres', 'mensaje');
+                valido = false;
+            }
+
+            // Si todo es válido, enviar formulario
+            if (valido) {
+                // Aquí iría la lógica de envío real
+                console.log('Formulario válido. Datos:', { nombre, email, mensaje });
+                alert('¡Formulario enviado con éxito!');
+                document.getElementById('contactForm').reset();
+            }
+        }
+
+        // Función para mostrar errores
+        function mostrarError(elementId, mensaje, inputId) {
+            document.getElementById(elementId).textContent = mensaje;
+            document.getElementById(inputId).classList.add('is-invalid');
+        }
+
+        // Event listener para el envío del formulario
+        document.getElementById('contactForm').addEventListener('submit', validarFormulario);
+    </script>
+</body>
+</html>
