@@ -1,0 +1,45 @@
+/* Estilos adicionales para mejorar la apariencia del formulario */
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Asegurar que los mensajes de error sean claramente visibles */
+.invalid-feedback {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Estilos para los estados de validación */
+.form-control.is-invalid,
+.form-control.is-valid {
+    background-position: right calc(0.375em + 0.1875rem) center;
+}
+
+/* Asegurar que el formulario sea legible en modo oscuro */
+[data-bs-theme="dark"] .card {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-border-color);
+}
+
+/* Mejorar la legibilidad de las etiquetas */
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo para el botón de envío */
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+}
+
+/* Espaciado adicional para el contenedor principal */
+.container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
